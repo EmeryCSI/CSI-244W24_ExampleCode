@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Registrations</h1>
+    <ul id="registrations"></ul>
+    <script>
+      //load data from the server
+      //library called fetch
+      //display the data in the ul with id of registrations
+      fetch("/registrations")
+        .then((response) => response.json())
+        .then((registrations) => {
+          const list = document.getElementById("registrations");
+          registrations.forEach((registration) => {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `
+                    <p>${registration.firstname} ${registration.lastname}</p>
+                    <p>${registration.email}</p>
+                    <p>${registration.attend}</p>
+                `;
+            list.appendChild(listItem);
+          });
+        });
+    </script>
+  </body>
+</html>
