@@ -1,39 +1,26 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
+//import {methodName} from location and name of the js file
+import { initializeAddTask } from "./initAddTask";
+import { getAllTasks } from "./repository/taskRepo";
 
-let todoList = [
-  {
-    task: "Buy groceries",
-    status: "incomplete",
-    priority: "high",
-  },
-  {
-    task: "Finish work presentation",
-    status: "incomplete",
-    priority: "medium",
-  },
-  {
-    task: "Go for a run",
-    status: "complete",
-    priority: "low",
-  },
-  {
-    task: "Read a book",
-    status: "incomplete",
-    priority: "medium",
-  },
-  {
-    task: "Play Baseball",
-    status: "incomplete",
-    priority: "low",
-  },
-];
+let todoList = [];
+
+const fetchTasks = async () => {
+  //get all the tasks
+  let response = await getAllTasks();
+  //when working with axois it automatically parses to json
+  //and stores the result in a data property
+  todoList = response.data;
+  displayList();
+};
 
 //create a function that runs when the page
 //This is like constructor of main.js
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Document Loaded");
-  displayList();
+  fetchTasks();
+  initializeAddTask();
 });
 
 const displayList = () => {
@@ -66,8 +53,8 @@ const displayList = () => {
               <div class="d-flex justify-content-between">
                 <p>${task.task}</p>
                 <p>${task.priority}</p>
-                <button class="btn btn-success">Complete</button>
-                <button class="btn btn-danger">Delete</button>
+                <button key=${index} class="btn btn-success complete-button">Complete</button>
+                <button key=${index} class="btn btn-danger delete-button">Delete</button>
               </div>`;
     list.appendChild(item);
     //because we dont know how many items will be in the list
@@ -75,6 +62,16 @@ const displayList = () => {
     //code them
     //We need to add the eventLister to the parent container
     //and then use the index to determine which button was clicked on
-    //console.log(`${task.task} - ${priorityClass}`);
+    //we add the listener to the parent
+    list.addEventListener("click", (event) => {
+      //get the index of the task
+      let index = event.target.getAttribute("key");
+      //find out whether they clicked complete or delete
+      if (event.target.classList.contains("complete-button")) {
+        console.log(`Complete ${index}`);
+      } else if (event.target.classList.contains("delete-button")) {
+        console.log(`Delete ${index}`);
+      }
+    });
   });
 };

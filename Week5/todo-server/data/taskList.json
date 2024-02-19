@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "task": "Buy groceries",
+    "status": "incomplete",
+    "priority": "high"
+  },
+  {
+    "id": 2,
+    "task": "Finish work presentation",
+    "status": "incomplete",
+    "priority": "medium"
+  },
+  {
+    "id": 3,
+    "task": "Go for a run",
+    "status": "complete",
+    "priority": "low"
+  },
+  {
+    "id": 4,
+    "task": "Read a book",
+    "status": "incomplete",
+    "priority": "medium"
+  },
+  {
+    "id": 5,
+    "task": "Play Baseball",
+    "status": "incomplete",
+    "priority": "low"
+  },
+  {
+    "id": 6,
+    "task": "Study",
+    "status": "incomplete",
+    "priority": "high"
+  }
+]
