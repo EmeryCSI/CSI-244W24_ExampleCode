@@ -25,6 +25,7 @@ listDatabases(client);
 const db = client.db("sample_mflix");
 
 //lets list the collections in the sample_mflix database
+//This function will list all the collections in the current database
 async function listCollections(db) {
   collections = await db.listCollections().toArray();
   console.log("Collections:");
@@ -41,12 +42,13 @@ async function findAllMovies() {
   const cursor = movies.find({});
   const moviesArray = await cursor.toArray();
   //filter by year
-  //This is a bad idea
+  //This is a bad idea because we are filtering in the node application. It is better to filter in the database
+  //but it is possible
   //const filteredMovies = moviesArray.filter((movie) => movie.year === 1972);
   console.log(moviesArray);
 }
 
-//findAllMovies();
+findAllMovies();
 
 //It is possible to get all of the movies and then
 //filter them in the application, but it is better to
@@ -60,7 +62,7 @@ async function findMovie(title) {
   console.log(movie);
 }
 
-//findMovie("The Godfather");
+findMovie("The Godfather");
 
 //lets find movies by genre and year
 async function findMoviesByGenreAndYear(genre, year) {
@@ -84,7 +86,7 @@ const newMovie = {
   director: "Steven Spielberg",
 };
 
-//insertMovie(newMovie);
+insertMovie(newMovie);
 
 //lets update a movie
 

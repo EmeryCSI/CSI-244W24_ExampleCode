@@ -16,9 +16,22 @@ const fs = require("fs");
 const path = require("path");
 const server = http.createServer((req, res) => {
   //we need to read the index.html file
-  fs.readFile(path.join(__dirname, "index.html"), "utf8", (err, data) => {
+  fs.readFile(path.join(__dirname, "index.html"), "utf8", (data) => {
     res.end(data);
   });
+  //lets add multiple endpoints
+  //if the user goes to /about
+  if (req.url === "/about") {
+    //send the about.html file
+    res.end("This is the about endpoint");
+  }
+  //if the user goes to /api
+  if (req.url === "/api") {
+    //Inlude a 200 status code which means everything is ok
+    res.writeHead(200, { "Content-Type": "application/json" });
+    //send a json object
+    res.end(JSON.stringify({ name: "John Doe", age: 30 }));
+  }
 });
 //start the server
 //this server will start at localhost:portNumber

@@ -21,3 +21,8 @@ fs.readFile("example.txt", "utf8", (error, data) => {
   }
   console.log(data);
 });
+
+fetch("url")
+  .then((res) => res.json())
+  .then((data) => console.log(data))
+  .catch(() => console.log("error"));

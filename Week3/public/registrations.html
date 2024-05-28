@@ -12,6 +12,7 @@
       //load data from the server
       //library called fetch
       //display the data in the ul with id of registrations
+      //This is sending a get request to /registerations
       fetch("/registrations")
         .then((response) => response.json())
         .then((registrations) => {

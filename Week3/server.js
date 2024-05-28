@@ -6,11 +6,13 @@ const app = express();
 //lets make an endpoint at /
 app.get("/", (req, res) => {
   //lets send an html file from this endpoint
+  res.contentType("text/html");
   res.sendFile(__dirname + "/public/index.html");
 });
 
 //lets make an endpoint at /registration-form
 app.get("/registration-form", (req, res) => {
+  res.contentType("text/html");
   res.sendFile(__dirname + "/public/registration-form.html");
 });
 
@@ -35,15 +37,18 @@ app.get("/register", (req, res) => {
     //write the regiratraions
     fs.writeFileSync(filePath, JSON.stringify(registrations));
   }
+  res.contentType("text/html");
   res.sendFile(__dirname + "/public/registrations.html");
 });
 
 app.get("/view-registrations", (req, res) => {
+  res.contentType("text/html");
   res.sendFile(__dirname + "/public/registrations.html");
 });
 
 app.get("/registrations", (req, res) => {
   //send the json file as a response
+  res.contentType("application/json");
   res.sendFile(__dirname + "/registrations.json");
 });
 
